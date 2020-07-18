@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+    <constant name="struts.multipart.maxSize" value="45000000"></constant>
+
+    <package name="com.wngweiping.struts" extends="struts-default">
+        <default-action-ref name="index"></default-action-ref>
+
+        <action name="index">
+            <result name="success">/index.jsp</result>
+        </action>
+        <action name="upload" class="com.wngweiping.struts.UploadAction">
+            <param name="savePath">/uploadFiles</param>
+            <result name="success">/success.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="Download" class="com.wngweiping.struts.DownloadAction">
+            <result name="success"></result>
+            <result name="error"></result>
+        </action>
+    </package>
+</struts>
