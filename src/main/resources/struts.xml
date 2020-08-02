@@ -19,9 +19,32 @@
             <result name="success">/success.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="Download" class="com.wngweiping.struts.DownloadAction">
-            <result name="success"></result>
-            <result name="error"></result>
+        <action name="multiUpload" class="com.wngweiping.struts.MultiUploadAction" method="execute">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">text/plain,image/png,image/gif,image/jpeg</param>
+                <param name="maxnumSize">204800</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <param name="savePath">/uploadMultiFiles</param>
+            <result name="success">/successMultFile.jsp</result>
+            <result name="error">/error.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+    </package>
+
+    <package name="com.wngweiping.struts.download" extends="struts-default">
+        <action name="download" class="com.wngweiping.struts.DownloadAction" method="execute">
+            <param name="downloadPath">/uploadMultiFiles</param>
+            <result name="success" type="stream">
+
+                <param name="inputName">targetFile</param>
+
+                <!-- <param name="contentType">image/jpg</param> -->
+
+                <param name="contentDisposition">attachment;filename=${filename}</param>
+
+                <param name="bufferSize">4096</param>
+            </result>
         </action>
     </package>
 </struts>
